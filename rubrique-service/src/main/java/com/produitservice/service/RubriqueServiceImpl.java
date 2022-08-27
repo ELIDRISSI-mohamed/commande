@@ -1,0 +1,53 @@
+package com.produitservice.service;
+
+import com.produitservice.exception.ExceptionCode;
+import com.produitservice.exception.TechnicalException;
+import com.produitservice.model.Rubrique;
+import com.produitservice.model.repository.RubriqueRepo;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.List;
+
+@Service @Transactional @Slf4j
+public class RubriqueServiceImpl implements RubriqueService {
+    RubriqueRepo rubriqueRepo;
+
+    public RubriqueServiceImpl(RubriqueRepo rubriqueRepo) {
+        this.rubriqueRepo = rubriqueRepo;
+    }
+
+    @Override
+    public Rubrique add(Rubrique rubrique) {
+        return rubriqueRepo.save(rubrique);
+    }
+    @Override
+    public Rubrique update(Rubrique rubrique) {
+        return rubriqueRepo.save(rubrique);
+    }
+    @Override
+    public Rubrique recherche(String nom) throws TechnicalException {
+        Rubrique rubrique = rubriqueRepo.findByNom(nom);
+        if(rubrique==null) throw new TechnicalException(ExceptionCode.RUBRIQUE_NOT_EXIST);
+        else return rubrique;
+    }
+    @Override
+    public Rubrique rechercheById(Long id) throws TechnicalException {
+        Rubrique rubrique = rubriqueRepo.findById(id).get();
+        if(rubrique==null) throw new TechnicalException(ExceptionCode.RUBRIQUE_NOT_EXIST);
+        else return rubrique;
+    }
+    @Override
+    public void delete(Long id) throws TechnicalException {
+        Rubrique rubrique = rubriqueRepo.findById(id).get();
+        if(rubrique==null) throw new TechnicalException(ExceptionCode.RUBRIQUE_NOT_EXIST);
+        else rubriqueRepo.delete(rubrique);
+    }
+    @Override
+    public List<Rubrique> all() throws TechnicalException {
+        List<Rubrique> rubriques = rubriqueRepo.findAll();
+        if(rubriques==null)  throw new TechnicalException(ExceptionCode.NO_RUBRIQUE);
+        else return rubriques;
+    }
+}
