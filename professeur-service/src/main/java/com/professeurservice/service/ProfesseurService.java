@@ -1,5 +1,6 @@
 package com.professeurservice.service;
 
+import com.professeurservice.dto.ProfResDto;
 import com.professeurservice.entity.Professeur;
 import com.professeurservice.exception.TechnicalException;
 
@@ -11,11 +12,11 @@ public interface ProfesseurService {
 
     Professeur search(String nom, String prenom) throws TechnicalException;
 
-    Optional<Professeur> searchById(Long id) throws TechnicalException;
+    Professeur searchById(Long id) throws TechnicalException;
 
     Professeur update(Professeur professeur);
 
     List<Professeur> allProfesseurs();
-
+    List<ProfResDto> findAllUsernameProfs();
     void delete(Long id);
 }

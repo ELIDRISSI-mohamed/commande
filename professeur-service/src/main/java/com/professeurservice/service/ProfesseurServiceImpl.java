@@ -1,5 +1,6 @@
 package com.professeurservice.service;
 
+import com.professeurservice.dto.ProfResDto;
 import com.professeurservice.entity.Professeur;
 import com.professeurservice.exception.ExceptionCode;
 import com.professeurservice.exception.TechnicalException;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -35,10 +37,10 @@ public class ProfesseurServiceImpl implements ProfesseurService {
     }
 
     @Override
-    public Optional<Professeur> searchById(Long id) throws TechnicalException {
-        Optional<Professeur> professeur = professeurRepo.findById(id);
+    public Professeur searchById(Long id) throws TechnicalException {
+        Professeur professeur = professeurRepo.findById(id).get();
         if (professeur == null) throw new TechnicalException(ExceptionCode.PROFESSEUR_NOT_EXIST);
-        return professeur;
+        else return professeur;
     }
 
     @Override
@@ -51,6 +53,15 @@ public class ProfesseurServiceImpl implements ProfesseurService {
     public List<Professeur> allProfesseurs() {
         log.info("Get all professeurs");
         return professeurRepo.findAll();
+    }
+
+    @Override
+    public List<ProfResDto> findAllUsernameProfs() {
+        log.info("Username Profs");
+        List<ProfResDto> profs = professeurRepo.findAll().stream()
+                .map(p-> p.toProfResDto()).collect(Collectors.toList());
+
+        return profs;
     }
 
     @Override

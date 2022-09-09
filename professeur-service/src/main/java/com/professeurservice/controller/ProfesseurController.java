@@ -1,5 +1,6 @@
 package com.professeurservice.controller;
 
+import com.professeurservice.dto.ProfResDto;
 import com.professeurservice.entity.Professeur;
 import com.professeurservice.exception.TechnicalException;
 import com.professeurservice.service.ProfesseurServiceImpl;
@@ -48,8 +49,13 @@ public class ProfesseurController {
     }
 
     @GetMapping("/getProfesseurById/{id}")
-    public Optional<Professeur> searchProfesseurById(@PathVariable Long id) throws TechnicalException {
+    public Professeur searchProfesseurById(@PathVariable Long id) throws TechnicalException {
         return professeurService.searchById(id);
+    }
+
+    @GetMapping("/getUsernameProfs")
+    public List<ProfResDto> getUsernameProfs() {
+        return professeurService.findAllUsernameProfs();
     }
 }
 
