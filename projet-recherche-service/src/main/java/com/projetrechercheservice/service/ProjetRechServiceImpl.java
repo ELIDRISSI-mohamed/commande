@@ -30,7 +30,7 @@ public class ProjetRechServiceImpl implements ProjetRechService{
     public ProjetRechercheDto addProjet(ProjetRechercheDto projet) throws TechnicalException {
         log.info("Add Projet Service");
         if (projet.getResponsable()==null||projet.getNom()==null||projet.getMembres()==null)  throw new TechnicalException("MESSING PARAMS");
-        else return projetRechercheRepo.save(projet.ToEntity()).ToProjetRechercheDto();
+        return projetRechercheRepo.save(projet.ToEntity()).ToProjetRechercheDto();
     }
     @Override
     public void deleteProjet(Long id) throws TechnicalException {
