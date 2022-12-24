@@ -4,7 +4,7 @@ import com.produitservice.dto.ProduitDto;
 import com.produitservice.exception.ExceptionCode;
 import com.produitservice.exception.TechnicalException;
 import com.produitservice.model.Produit;
-import com.produitservice.model.repository.ProduitRepo;
+import com.produitservice.repository.ProduitRepo;
 import com.produitservice.openFeign.RubriqueRestClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

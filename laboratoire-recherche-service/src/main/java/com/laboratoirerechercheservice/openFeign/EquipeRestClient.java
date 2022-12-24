@@ -1,6 +1,7 @@
 package com.laboratoirerechercheservice.openFeign;
 
 
+import com.laboratoirerechercheservice.dto.EquipeRechercheDto;
 import com.laboratoirerechercheservice.dto.ProfesseurDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +14,7 @@ public interface EquipeRestClient {
     @GetMapping("/all")
     List<ProfesseurDto> all();
     @GetMapping("/serchEquipe/{id}")
-    ProfesseurDto searchEquipeById(@PathVariable("id") Long id);
+    EquipeRechercheDto searchEquipeById(@PathVariable("id") Long id);
     @GetMapping("/serchEquipeByNom/{name}")
-    ProfesseurDto searchProfesseurByName(@PathVariable("name") String name);
+    EquipeRechercheDto searchProfesseurByName(@PathVariable("name") String name);
 }

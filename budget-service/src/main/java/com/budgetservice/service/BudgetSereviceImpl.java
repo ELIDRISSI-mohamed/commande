@@ -24,7 +24,6 @@ public class BudgetSereviceImpl implements BudgetService{
 
     @Override
     public Budget update(Budget budget) throws Exception {
-        if(budget.getBudget()==0.0 || budget.getNom().equals("")) throw new Exception("MISSING_PARAMS");
         return budgetRepo.save(budget);
     }
 

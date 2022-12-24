@@ -1,14 +1,15 @@
 package com.laboratoirerechercheservice.service;
 
+import com.laboratoirerechercheservice.dto.EquipeRechercheDto;
 import com.laboratoirerechercheservice.dto.LaboratoireDto;
 import com.laboratoirerechercheservice.dto.ProfesseurDto;
 import com.laboratoirerechercheservice.exception.ExceptionCode;
 import com.laboratoirerechercheservice.exception.TechnicalException;
 import com.laboratoirerechercheservice.model.Laboratoire;
+import com.laboratoirerechercheservice.openFeign.EquipeRestClient;
 import com.laboratoirerechercheservice.openFeign.ProfesseurRestClient;
 import com.laboratoirerechercheservice.repository.LaboratoireRepo;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -22,13 +23,14 @@ import java.util.stream.Collectors;
 @Slf4j
 public class LaboratoireServiceImpl implements LaboratoireService {
     ProfesseurRestClient professeurRestClient;
+    EquipeRestClient equipeRestClient;
     LaboratoireRepo laboratoireRepo;
 
-    public LaboratoireServiceImpl(LaboratoireRepo laboratoireRepo, ProfesseurRestClient professeurRestClient) {
-        this.laboratoireRepo = laboratoireRepo;
+    public LaboratoireServiceImpl(ProfesseurRestClient professeurRestClient, EquipeRestClient equipeRestClient, LaboratoireRepo laboratoireRepo) {
         this.professeurRestClient = professeurRestClient;
+        this.equipeRestClient = equipeRestClient;
+        this.laboratoireRepo = laboratoireRepo;
     }
-
 
     public LaboratoireDto addLabo(LaboratoireDto laboratoireDto) throws TechnicalException {
         ProfesseurDto professeurDtoList = professeurRestClient.searchProfesseurById(1L);
@@ -36,11 +38,11 @@ public class LaboratoireServiceImpl implements LaboratoireService {
         if (laboratoireDto.getResponsable() == null || laboratoireDto.getResponsable().getId() ==null) {
             throw new TechnicalException("MISSING_PARAMS");
         }
-
+        System.out.println(laboratoireDto);
         Laboratoire laboratoire = laboratoireDto.convertToEntity();
-        laboratoire = laboratoireRepo.save(laboratoire);
+        System.out.println(laboratoire);
+        return laboratoireRepo.save(laboratoire).convertToDto();
 
-        return laboratoire.convertToDto();
     }
 
     @Override
@@ -51,7 +53,7 @@ public class LaboratoireServiceImpl implements LaboratoireService {
                 .collect(Collectors.toList());
         List<LaboratoireDto> laboratoireDtos1 = new ArrayList<>();
         for (LaboratoireDto laboratoireDto : laboratoireDtos) {
-            laboratoireDto.setResponsable(professeurRestClient.searchProfesseurById(laboratoireDto.getId()));
+            laboratoireDto.setResponsable(professeurRestClient.searchProfesseurById(laboratoireDto.getResponsable().getId()));
             laboratoireDtos1.add(laboratoireDto);
         }
         return laboratoireDtos;
@@ -122,4 +124,20 @@ public class LaboratoireServiceImpl implements LaboratoireService {
             return professeurDto;
         }
     }
+    @Override
+    public List<EquipeRechercheDto> getEquipes(Long id) throws TechnicalException {
+        Optional<Laboratoire> laboratoire = laboratoireRepo.findById(id);
+        List<EquipeRechercheDto> equipeRechercheDtos;
+        if(!laboratoire.isPresent()) throw new TechnicalException(ExceptionCode.Laboratoire_NOT_EXIST);
+        else {
+            System.out.println(laboratoire.get());
+            System.out.println(equipeRestClient.searchEquipeById(1L));
+            laboratoire.get().getEquipes().forEach(e-> System.out.println(e));
+             equipeRechercheDtos = laboratoire.get().getEquipes().stream()
+                    .map(item -> equipeRestClient.searchEquipeById(item))
+                    .collect(Collectors.toList());
+            return equipeRechercheDtos;
+        }
+    }
+
 }

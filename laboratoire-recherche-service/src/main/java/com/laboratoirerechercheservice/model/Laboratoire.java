@@ -6,6 +6,7 @@ import com.laboratoirerechercheservice.dto.ProfesseurDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Laboratoire {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,7 +29,7 @@ public class Laboratoire {
     private Set<Long> membres;
     private double budget_annuel;
     @ElementCollection
-    private Set<Long> equipe;
+    private Set<Long> equipes;
 
     public LaboratoireDto convertToDto() {
         LaboratoireDto target = new LaboratoireDto();
@@ -41,7 +43,7 @@ public class Laboratoire {
                 .map(item -> new ProfesseurDto(item))
                 .collect(Collectors.toSet())
         );
-        target.setEquipe(this.getEquipe().stream()
+        target.setEquipes(this.getEquipes().stream()
                 .map(item -> new EquipeRechercheDto(item))
                 .collect(Collectors.toSet())
         );

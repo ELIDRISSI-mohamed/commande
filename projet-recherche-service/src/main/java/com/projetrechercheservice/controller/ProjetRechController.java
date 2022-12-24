@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController @Slf4j
 @RequestMapping("projet")
@@ -49,7 +50,7 @@ public class ProjetRechController {
         return projetRechService.responsableProjet(id);
     }
     @GetMapping("/membres/{id}")
-    List<ProfesseurDto> membresProjet(@PathVariable Long id) throws TechnicalException {
+    Set<ProfesseurDto> membresProjet(@PathVariable Long id) throws TechnicalException {
         return projetRechService.membresProjet(id);
     }
 }

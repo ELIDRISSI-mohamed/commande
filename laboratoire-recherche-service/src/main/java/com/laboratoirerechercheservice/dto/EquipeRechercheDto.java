@@ -13,8 +13,8 @@ public class EquipeRechercheDto {
     private Long id;
     private String nom;
     private String acronyme;
-    private Long responsable;
-    private List<Long> membres;
+    private ProfesseurDto responsable;
+    private List<ProfesseurDto> membres;
     private double budget_annuel;
 
     public EquipeRechercheDto(Long id){

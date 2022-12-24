@@ -1,6 +1,7 @@
 package com.laboratoirerechercheservice.controller;
 
 
+import com.laboratoirerechercheservice.dto.EquipeRechercheDto;
 import com.laboratoirerechercheservice.dto.LaboratoireDto;
 import com.laboratoirerechercheservice.dto.ProfesseurDto;
 import com.laboratoirerechercheservice.exception.TechnicalException;
@@ -56,7 +57,9 @@ public class LaboratoireController {
     public ProfesseurDto getResponsable(@PathVariable Long id) throws TechnicalException {
         return laboratoireService.getResponsable(id);
     }
-
-
-
+    @GetMapping("/equipes/{id}")
+    public List<EquipeRechercheDto> getEquipes(@PathVariable Long id) throws TechnicalException {
+        System.out.println(id);
+        return laboratoireService.getEquipes(id);
+    }
 }

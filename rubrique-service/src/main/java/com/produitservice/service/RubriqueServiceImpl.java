@@ -3,12 +3,13 @@ package com.produitservice.service;
 import com.produitservice.exception.ExceptionCode;
 import com.produitservice.exception.TechnicalException;
 import com.produitservice.model.Rubrique;
-import com.produitservice.model.repository.RubriqueRepo;
+import com.produitservice.repository.RubriqueRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service @Transactional @Slf4j
 public class RubriqueServiceImpl implements RubriqueService {
@@ -34,15 +35,15 @@ public class RubriqueServiceImpl implements RubriqueService {
     }
     @Override
     public Rubrique rechercheById(Long id) throws TechnicalException {
-        Rubrique rubrique = rubriqueRepo.findById(id).get();
-        if(rubrique==null) throw new TechnicalException(ExceptionCode.RUBRIQUE_NOT_EXIST);
-        else return rubrique;
+        Optional<Rubrique> rubrique = rubriqueRepo.findById(id);
+        if(!rubrique.isPresent()) throw new TechnicalException(ExceptionCode.RUBRIQUE_NOT_EXIST);
+        return rubrique.get();
     }
     @Override
     public void delete(Long id) throws TechnicalException {
-        Rubrique rubrique = rubriqueRepo.findById(id).get();
-        if(rubrique==null) throw new TechnicalException(ExceptionCode.RUBRIQUE_NOT_EXIST);
-        else rubriqueRepo.delete(rubrique);
+        Optional<Rubrique> rubrique = rubriqueRepo.findById(id);
+        if(!rubrique.isPresent()) throw new TechnicalException(ExceptionCode.RUBRIQUE_NOT_EXIST);
+        rubriqueRepo.deleteById(rubrique.get().getId());
     }
     @Override
     public List<Rubrique> all() throws TechnicalException {

@@ -1,5 +1,6 @@
 package com.laboratoirerechercheservice.service;
 
+import com.laboratoirerechercheservice.dto.EquipeRechercheDto;
 import com.laboratoirerechercheservice.dto.LaboratoireDto;
 import com.laboratoirerechercheservice.dto.ProfesseurDto;
 import com.laboratoirerechercheservice.exception.TechnicalException;
@@ -16,4 +17,7 @@ public interface LaboratoireService {
     void deleteLabo(Long id) throws TechnicalException;
     List<ProfesseurDto> getMembres(Long id) throws TechnicalException;
     ProfesseurDto getResponsable(Long id) throws TechnicalException;
+
+
+    List<EquipeRechercheDto> getEquipes(Long id) throws TechnicalException;
 }

@@ -16,4 +16,6 @@ public class Rubrique {
     private Long id;
     @Column(unique = true)
     private String nom;
+    private String description;
+    private double budget;
 }

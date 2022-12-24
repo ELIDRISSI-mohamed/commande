@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("equipe")
@@ -24,7 +25,7 @@ public class EquipeRechercheController {
         return equipeRechercheService.addEquipe(equipeRechercheDto);
     }
     @GetMapping("/all")
-    List<EquipeRechercheDto> allLabo() {
+    List<EquipeRechercheDto> allLabo() throws TechnicalException {
         return equipeRechercheService.allEquipe();
     }
     @GetMapping("/serchEquipe/{id}")
@@ -44,7 +45,7 @@ public class EquipeRechercheController {
         equipeRechercheService.deleteEquipe(id);
     }
     @GetMapping("/membres/{id}")
-    List<ProfesseurDto> getMembres(@PathVariable Long id) throws TechnicalException {
+    Set<ProfesseurDto> getMembres(@PathVariable Long id) throws TechnicalException {
         return equipeRechercheService.getMembres(id);
     }
     @GetMapping("/responsable/{id}")

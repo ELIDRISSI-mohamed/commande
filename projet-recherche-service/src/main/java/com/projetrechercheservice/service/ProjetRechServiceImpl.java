@@ -12,8 +12,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service @Transactional @Slf4j
@@ -52,16 +54,28 @@ public class ProjetRechServiceImpl implements ProjetRechService{
     }
     @Override
     public ProjetRechercheDto searchById(Long id) throws TechnicalException {
-        ProjetRecherche projetRecherche = projetRechercheRepo.findById(id).get();
-        if(projetRecherche==null) throw new TechnicalException(ExceptionCode.PROJET_NOT_FOUND);
-        else return projetRecherche.ToProjetRechercheDto();
+        Optional<ProjetRecherche> projetRecherche = projetRechercheRepo.findById(id);
+        if(!projetRecherche.isPresent()) throw new TechnicalException(ExceptionCode.PROJET_NOT_FOUND);
+        ProjetRechercheDto projetRechercheDto = projetRecherche.get().ToProjetRechercheDto();
+        projetRechercheDto.setResponsable(responsableProjet(projetRechercheDto.getId()));
+        projetRechercheDto.setMembres(membresProjet(projetRechercheDto.getId()));
+
+        return projetRechercheDto;
     }
 
     @Override
     public List<ProjetRechercheDto> allProjet() throws TechnicalException {
         List<ProjetRecherche> projetRecherches = projetRechercheRepo.findAll();
         if(projetRecherches==null) throw new TechnicalException(ExceptionCode.PROJET_NOT_FOUND);
-        return projetRecherches.stream().map(pr -> pr.ToProjetRechercheDto()).collect(Collectors.toList());
+        List<ProjetRechercheDto> projetRechercheDtos = projetRecherches.stream().map(pr -> pr.ToProjetRechercheDto()).collect(Collectors.toList());
+        List<ProjetRechercheDto> projetRechercheDtos1 = new ArrayList<>();
+        for(ProjetRechercheDto projetRechercheDto: projetRechercheDtos){
+            projetRechercheDto.setMembres(membresProjet(projetRechercheDto.getId()));
+            projetRechercheDto.setResponsable(responsableProjet(projetRechercheDto.getId()));
+            projetRechercheDtos1.add(projetRechercheDto);
+        }
+        return projetRechercheDtos1;
+
     }
     @Override
     public ProfesseurDto responsableProjet(Long id) throws TechnicalException {
@@ -74,12 +88,12 @@ public class ProjetRechServiceImpl implements ProjetRechService{
     }
 
     @Override
-    public List<ProfesseurDto> membresProjet(Long id) throws TechnicalException {
-        ProjetRecherche projetRecherche = projetRechercheRepo.findById(id).get();
-        if(projetRecherche==null) throw new TechnicalException(ExceptionCode.PROJET_NOT_FOUND);
+    public Set<ProfesseurDto> membresProjet(Long id) throws TechnicalException {
+        Optional<ProjetRecherche> projetRecherche = projetRechercheRepo.findById(id);
+        if(!projetRecherche.isPresent()) throw new TechnicalException(ExceptionCode.PROJET_NOT_FOUND);
         else {
-            List<ProfesseurDto> professeurDtos = projetRecherche.getMembres().stream()
-                    .map(p-> professeurRestClient.searchProfesseurById(p)).collect(Collectors.toList());
+            Set<ProfesseurDto> professeurDtos = projetRecherche.get().getMembres().stream()
+                    .map(p-> professeurRestClient.searchProfesseurById(p)).collect(Collectors.toSet());
             return professeurDtos;
         }
     }

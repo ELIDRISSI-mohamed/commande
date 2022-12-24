@@ -10,8 +10,10 @@ import com.equiperechercheservice.repository.EquipeRechercheRepo;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -35,19 +37,29 @@ public class EquipeRechercheServiceImpl implements EquipeRechercheService {
         }
     }
     @Override
-    public List<EquipeRechercheDto> allEquipe() {
+    public List<EquipeRechercheDto> allEquipe() throws TechnicalException {
         List<EquipeRecherche> equipeRecherches = equipeRechercheRepo.findAll();
         List<EquipeRechercheDto> equipeRechercheDtos = equipeRecherches.stream()
                 .map(equipeRecherche -> equipeRecherche.convertToDto()).collect(Collectors.toList());
 
-        return equipeRechercheDtos;
+        List<EquipeRechercheDto> equipeRechercheDtos1 = new ArrayList<EquipeRechercheDto>();
+        for(EquipeRechercheDto equipeRechercheDto: equipeRechercheDtos) {
+            equipeRechercheDto.setMembres(getMembres(equipeRechercheDto.getId()));
+            equipeRechercheDto.setResponsable(getResponsable(equipeRechercheDto.getId()));
+            equipeRechercheDtos1.add(equipeRechercheDto);
+        }
+        return equipeRechercheDtos1;
     }
     @Override
     public EquipeRechercheDto serchEquipe(Long id) throws TechnicalException {
-        EquipeRecherche equipeRecherche = equipeRechercheRepo.findById(id).get();
-        if (equipeRecherche == null) throw new TechnicalException(ExceptionCode.Laboratoire_NOT_EXIST);
+        Optional<EquipeRecherche> equipeRecherche = equipeRechercheRepo.findById(id);
+        if (!equipeRecherche.isPresent()) throw new TechnicalException(ExceptionCode.Laboratoire_NOT_EXIST);
         else {
-            return equipeRecherche.convertToDto();
+            EquipeRechercheDto equipeRechercheDto = equipeRecherche.get().convertToDto();
+            equipeRechercheDto.setResponsable(getResponsable(equipeRechercheDto.getId()));
+            equipeRechercheDto.setMembres(getMembres(equipeRechercheDto.getId()));
+
+            return equipeRechercheDto;
         }
     }
     @Override
@@ -68,33 +80,33 @@ public class EquipeRechercheServiceImpl implements EquipeRechercheService {
     }
     @Override
     public void deleteEquipe(Long id) throws TechnicalException {
-        EquipeRecherche equipeRecherche = equipeRechercheRepo.findById(id).get();
-        if (equipeRecherche != null) equipeRechercheRepo.deleteById(id);
+        Optional<EquipeRecherche> equipeRecherche = equipeRechercheRepo.findById(id);
+        if (equipeRecherche.isPresent()) equipeRechercheRepo.deleteById(id);
         else {
             throw new TechnicalException(ExceptionCode.Laboratoire_NOT_EXIST);
         }
     }
 
     @Override
-    public List<ProfesseurDto> getMembres(Long id) throws TechnicalException {
+    public Set<ProfesseurDto> getMembres(Long id) throws TechnicalException {
         Optional<EquipeRecherche> equipeRecherche = equipeRechercheRepo.findById(id);
-        List<ProfesseurDto> professeurDtos;
+        Set<ProfesseurDto> professeurDtos;
         if (!equipeRecherche.isPresent()) throw new TechnicalException(ExceptionCode.Laboratoire_NOT_EXIST);
         else {
             EquipeRechercheDto equipeRechercheDto = equipeRecherche.get().convertToDto();
             professeurDtos = equipeRechercheDto.getMembres().stream()
-                    .map(professeurDto -> professeurRestClient.searchProfesseurById(professeurDto.getId())).collect(Collectors.toList());
+                    .map(professeurDto -> professeurRestClient.searchProfesseurById(professeurDto.getId())).collect(Collectors.toSet());
 
             return professeurDtos;
         }
     }
     @Override
     public ProfesseurDto getResponsable(Long id) throws TechnicalException {
-        EquipeRecherche equipeRecherche = equipeRechercheRepo.findById(id).get();
+        Optional<EquipeRecherche> equipeRecherche = equipeRechercheRepo.findById(id);
         ProfesseurDto professeurDto;
-        if (equipeRecherche == null) throw new TechnicalException(ExceptionCode.Laboratoire_NOT_EXIST);
+        if (!equipeRecherche.isPresent()) throw new TechnicalException(ExceptionCode.Laboratoire_NOT_EXIST);
         else {
-            EquipeRechercheDto equipeRechercheDto = equipeRecherche.convertToDto();
+            EquipeRechercheDto equipeRechercheDto = equipeRecherche.get().convertToDto();
             professeurDto = professeurRestClient.searchProfesseurById(equipeRechercheDto.getResponsable().getId());
             return professeurDto;
         }

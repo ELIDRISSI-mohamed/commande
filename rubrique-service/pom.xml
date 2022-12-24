@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com</groupId>
-    <artifactId>professeur-service</artifactId>
+    <artifactId>rubrique-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>professeur-service</name>
-    <description>professeur-service</description>
+    <name>rubrique-service</name>
+    <description>rubrique-service</description>
     <properties>
         <java.version>1.8</java.version>
         <spring-cloud.version>2021.0.3</spring-cloud.version>

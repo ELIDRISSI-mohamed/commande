@@ -1,4 +1,4 @@
-package com.produitservice.model.repository;
+package com.produitservice.repository;
 
 import com.produitservice.model.Produit;
 import org.springframework.data.jpa.repository.JpaRepository;
