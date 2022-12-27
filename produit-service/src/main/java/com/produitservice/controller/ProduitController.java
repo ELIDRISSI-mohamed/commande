@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController @Slf4j
 @RequestMapping("produit")
+@CrossOrigin("*")
 public class ProduitController {
     ProduitService produitService;
 

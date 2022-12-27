@@ -13,6 +13,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("equipe")
+@CrossOrigin("*")
 public class EquipeRechercheController {
     EquipeRechercheService equipeRechercheService;
 

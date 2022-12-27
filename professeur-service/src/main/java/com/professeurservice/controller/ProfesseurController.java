@@ -14,7 +14,8 @@ import java.util.Optional;
 
 
 @RestController
-@Slf4j @CrossOrigin("*")
+@Slf4j
+@CrossOrigin("*")
 @RequestMapping("/professeur")
 public class ProfesseurController {
     private ProfesseurServiceImpl professeurService;

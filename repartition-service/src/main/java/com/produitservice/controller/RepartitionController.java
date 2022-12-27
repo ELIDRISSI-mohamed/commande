@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @RestController @Slf4j
 @RequestMapping("repartitions")
+@CrossOrigin("*")
 public class RepartitionController {
     private RepartitionService repartitionService;
 

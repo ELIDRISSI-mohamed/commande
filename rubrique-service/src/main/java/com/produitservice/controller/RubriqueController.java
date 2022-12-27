@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController @Slf4j
 @RequestMapping("rubrique")
+@CrossOrigin("*")
 public class RubriqueController {
     RubriqueService rubriqueService;
 

@@ -17,6 +17,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("labo")
+@CrossOrigin("*")
 public class LaboratoireController {
     LaboratoireService laboratoireService;
 

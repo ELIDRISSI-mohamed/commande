@@ -13,6 +13,7 @@ import java.util.Set;
 
 @RestController @Slf4j
 @RequestMapping("projet")
+@CrossOrigin("*")
 public class ProjetRechController {
     ProjetRechService projetRechService;
 
