@@ -20,6 +20,8 @@ public class Produit {
     private String nom;
     private String description;
     private Long rubrique;
+    private double prix;
+    private int qte;
 
     public ProduitDto toDto() {
         ProduitDto target = new ProduitDto();
@@ -28,6 +30,8 @@ public class Produit {
         target.setNom(this.getNom());
         target.setDescription(this.getDescription());
         target.setRubrique(new RubriqueDto(this.getRubrique()));
+        target.setPrix(this.getPrix());
+        target.setQte(this.getQte());
 
         return target;
     }

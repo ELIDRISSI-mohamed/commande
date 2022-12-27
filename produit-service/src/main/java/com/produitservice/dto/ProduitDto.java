@@ -11,6 +11,8 @@ public class ProduitDto {
     private String nom;
     private String description;
     private RubriqueDto rubrique;
+    private double prix;
+    private int qte;
 
     public Produit toEntity() {
         Produit target = new Produit();
@@ -19,6 +21,8 @@ public class ProduitDto {
         target.setNom(this.getNom());
         target.setDescription(this.getDescription());
         target.setRubrique(this.getRubrique().getId());
+        target.setPrix(this.getPrix());
+        target.setQte(this.getQte());
 
         return target;
     }

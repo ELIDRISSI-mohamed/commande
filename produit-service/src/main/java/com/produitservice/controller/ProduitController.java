@@ -20,12 +20,12 @@ public class ProduitController {
     }
 
     @PostMapping("/add")
-    public ProduitDto add(@RequestBody Produit produit) {
-        return produitService.add(produit);
+    public ProduitDto add(@RequestBody ProduitDto produitDto) {
+        return produitService.add(produitDto);
     }
     @PutMapping("/update")
-    public ProduitDto update(@RequestBody Produit produit) {
-        return produitService.update(produit);
+    public ProduitDto update(@RequestBody ProduitDto produitDto) {
+        return produitService.update(produitDto);
     }
     @GetMapping("/{nom}")
     public ProduitDto recherche(@PathVariable String nom) throws TechnicalException {

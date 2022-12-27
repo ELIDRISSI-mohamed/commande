@@ -23,12 +23,12 @@ public class ProduitServiceImpl implements ProduitService {
     }
 
     @Override
-    public ProduitDto add(Produit produit) {
-        return produitRepo.save(produit).toDto();
+    public ProduitDto add(ProduitDto produitDto) {
+        return produitRepo.save(produitDto.toEntity()).toDto();
     }
     @Override
-    public ProduitDto update(Produit produit) {
-        return produitRepo.save(produit).toDto();
+    public ProduitDto update(ProduitDto produitDto) {
+        return produitRepo.save(produitDto.toEntity()).toDto();
     }
     @Override
     public ProduitDto recherche(String nom) throws TechnicalException {
