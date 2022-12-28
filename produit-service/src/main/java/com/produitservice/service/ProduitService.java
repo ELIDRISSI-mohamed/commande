@@ -11,6 +11,7 @@ public interface ProduitService {
     public ProduitDto add(ProduitDto produitDto);
     public ProduitDto update(ProduitDto produitDto);
     public ProduitDto recherche(String nom) throws TechnicalException;
+    public ProduitDto get(long id) throws Exception;
     public void delete(Long id) throws TechnicalException;
-    public List<Produit> all() throws TechnicalException;
+    public List<ProduitDto> all() throws TechnicalException;
 }

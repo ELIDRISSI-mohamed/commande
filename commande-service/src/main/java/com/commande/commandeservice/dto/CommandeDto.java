@@ -12,18 +12,18 @@ import java.util.stream.Collectors;
 @Data @NoArgsConstructor @AllArgsConstructor
 public class CommandeDto {
     private Long id;
-    private ProfesseurDto professeur;
+    private String responsable;
     @ElementCollection
     private List<ProduitDto> produits;
-    private Double prixTotale;
+    private Double prixTotal;
 
     public CommandeModel toEntity(){
         CommandeModel target = new CommandeModel();
 
         target.setId(this.id);
-        target.setProfesseur(this.getProfesseur().getId());
+        target.setResponsable(this.getResponsable());
         target.setProduits(this.getProduits().stream().map(ProduitDto::getId).collect(Collectors.toList()));
-        target.setPrixTotale(this.getPrixTotale());
+        target.setPrixTotal(this.getPrixTotal());
 
         return target;
     }

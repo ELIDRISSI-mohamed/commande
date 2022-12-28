@@ -2,7 +2,6 @@ package com.commande.commandeservice.model;
 
 import com.commande.commandeservice.dto.CommandeDto;
 import com.commande.commandeservice.dto.ProduitDto;
-import com.commande.commandeservice.dto.ProfesseurDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,18 +17,18 @@ public class CommandeModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Long professeur;
+    private String responsable;
     @ElementCollection
     private List<Long> produits;
-    private Double prixTotale;
+    private Double prixTotal;
 
     public CommandeDto toDto(){
         CommandeDto target = new CommandeDto();
 
         target.setId(this.id);
-        target.setProfesseur(new ProfesseurDto(this.getProfesseur()));
+        target.setResponsable(this.getResponsable());
         target.setProduits(this.getProduits().stream().map(item -> new ProduitDto(item)).collect(Collectors.toList()));
-        target.setPrixTotale(this.getPrixTotale());
+        target.setPrixTotal(this.getPrixTotal());
 
         return target;
     }

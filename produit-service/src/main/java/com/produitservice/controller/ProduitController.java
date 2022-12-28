@@ -28,16 +28,20 @@ public class ProduitController {
     public ProduitDto update(@RequestBody ProduitDto produitDto) {
         return produitService.update(produitDto);
     }
-    @GetMapping("/{nom}")
+    @GetMapping("/byNom/{nom}")
     public ProduitDto recherche(@PathVariable String nom) throws TechnicalException {
         return produitService.recherche(nom);
+    }
+    @GetMapping("/{id}")
+    public ProduitDto get(@PathVariable long id) throws Exception {
+        return produitService.get(id);
     }
     @GetMapping("/delete/{id}")
     public void delete(@PathVariable Long id) throws TechnicalException {
         produitService.delete(id);
     }
     @GetMapping("/all")
-    public List<Produit> all() throws TechnicalException {
+    public List<ProduitDto> all() throws TechnicalException {
         return produitService.all();
     }
 
