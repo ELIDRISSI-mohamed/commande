@@ -12,6 +12,7 @@
     <artifactId>professeur-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>professeur-service</name>
+    <packaging>war</packaging>
     <description>professeur-service</description>
     <properties>
         <java.version>1.8</java.version>
@@ -63,8 +64,10 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -112,6 +115,7 @@
     </dependencyManagement>
 
     <build>
+        <finalName>PROFESSEUR-SERVICE</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -133,6 +137,11 @@
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.1.0</version>
             </plugin>
             <plugin>
                 <groupId>org.asciidoctor</groupId>

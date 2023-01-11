@@ -12,6 +12,7 @@
     <artifactId>budget-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>budget-service</name>
+    <packaging>war</packaging>
     <description>budget-service</description>
     <properties>
         <java.version>1.8</java.version>
@@ -82,6 +83,11 @@
             <artifactId>spring-restdocs-mockmvc</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -97,6 +103,7 @@
     </dependencyManagement>
 
     <build>
+        <finalName>BUDGET-SERVICE</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -118,6 +125,11 @@
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.1.0</version>
             </plugin>
             <plugin>
                 <groupId>org.asciidoctor</groupId>

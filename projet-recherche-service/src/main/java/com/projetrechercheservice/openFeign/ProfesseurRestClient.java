@@ -10,7 +10,6 @@ import java.util.List;
 
 @FeignClient(url = "${url-professeur-service}", name = "PROJET-RECH-SERVICE")
 public interface ProfesseurRestClient {
-
     @GetMapping("/all")
     List<ProfesseurDto> all();
     @GetMapping("/getProfesseurById/{id}")
