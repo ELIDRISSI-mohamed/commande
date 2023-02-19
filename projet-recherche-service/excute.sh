@@ -1,1 +1,1 @@
-mvn spring-boot:run
+cd target  && java -jar projet-recheche-service-0.0.1-SNAPSHOT.jar  

@@ -12,7 +12,6 @@
     <artifactId>professeur-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>projet-recherche-service</name>
-    <packaging>war</packaging>
     <description>projet-recherche-service</description>
     <properties>
         <java.version>1.8</java.version>

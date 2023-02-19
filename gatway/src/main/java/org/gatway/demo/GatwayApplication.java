@@ -13,7 +13,7 @@ import org.springframework.cloud.gateway.discovery.DiscoveryLocatorProperties;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class GatwayApplication extends SpringBootServletInitializer {
+public class GatwayApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GatwayApplication.class, args);
@@ -21,9 +21,5 @@ public class GatwayApplication extends SpringBootServletInitializer {
 	@Bean
 	DiscoveryClientRouteDefinitionLocator discoveryRoutes(ReactiveDiscoveryClient rdc, DiscoveryLocatorProperties dlp) {
 		return new DiscoveryClientRouteDefinitionLocator(rdc, dlp);
-	}
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder){
-		return builder.sources(GatwayApplication.class);
 	}
 }

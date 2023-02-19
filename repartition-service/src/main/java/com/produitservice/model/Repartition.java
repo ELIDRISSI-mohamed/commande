@@ -16,6 +16,7 @@ public class Repartition {
     private Long id;
     private String nom;
     private Long idBudget;
+    private Long sousBudget;
     private String typeStructure;
     private Long idStructure;
 }

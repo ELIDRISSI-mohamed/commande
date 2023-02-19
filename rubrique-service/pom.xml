@@ -12,7 +12,6 @@
     <artifactId>rubrique-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>rubrique-service</name>
-    <packaging>war</packaging>
     <description>rubrique-service</description>
     <properties>
         <java.version>1.8</java.version>

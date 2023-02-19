@@ -46,11 +46,19 @@ public class RepartitionServiceImpl implements RepartitionService {
         return repartition.get();
     }
 
+    public String structure(Repartition repartition){
+        if(repartition.getTypeStructure().equals("Rubrique")) return "Rubrique";
+        else if(repartition.getTypeStructure().equals("Projet-Recherche")) return "Projet-Recherche";
+        else if(repartition.getTypeStructure().equals("Equipe-Recherche")) return "Equipe-Recherche";
+        else return "Laboratoire-Recherche";
+    }
+
     @Override
     public void delete(Long id) throws TechnicalException {
         Optional<Repartition> repartition = repartitionRepo.findById(id);
         if(!repartition.isPresent()) throw new TechnicalException("REPARTITION_NOT_FOUND");
-        else repartitionRepo.deleteById(id);
+
+        repartitionRepo.deleteById(id);
     }
 
     @Override

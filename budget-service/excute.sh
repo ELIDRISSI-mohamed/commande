@@ -1,1 +1,1 @@
-mvn spring-boot:run
+cd target  && java -jar budget-service-0.0.1-SNAPSHOT.jar

@@ -1,59 +1,64 @@
 package com.commande.commandeservice.service;
 
+
 import com.commande.commandeservice.dto.CommandeDto;
-import com.commande.commandeservice.dto.ProduitDto;
+import com.commande.commandeservice.exception.ExceptionCode;
 import com.commande.commandeservice.exception.TechnicalException;
 import com.commande.commandeservice.model.CommandeModel;
-import com.commande.commandeservice.openFeign.ProduitRestClient;
+import com.commande.commandeservice.model.ProduitCommande;
 import com.commande.commandeservice.repo.CommandeRepo;
+import com.commande.commandeservice.repo.ProduitRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class CommandeServiceImpl implements CommandeService{
-    private CommandeRepo commandeRepo;
-    private ProduitRestClient produitRestClient;
+    CommandeRepo commandeRepo;
+    ProduitRepo produitRepo;
 
-    public CommandeServiceImpl(CommandeRepo commandeRepo, ProduitRestClient produitRestClient) {
+    public CommandeServiceImpl(CommandeRepo commandeRepo, ProduitRepo produitRepo) {
         this.commandeRepo = commandeRepo;
-        this.produitRestClient = produitRestClient;
+        this.produitRepo = produitRepo;
     }
 
-    @Override
-    public CommandeDto add(CommandeDto commandeDto) throws TechnicalException {
-        return commandeRepo.save(commandeDto.toEntity()).toDto();
+    public CommandeDto add(CommandeDto commande) throws TechnicalException {
+        CommandeModel commandeModel = commande.toEntity();
+        List<ProduitCommande> produits = commandeModel.getProduits();
+        commandeModel.setProduits(null);
+        commandeModel.setId(null);
+        commandeModel.setDate(new Date());
+        commandeModel = commandeRepo.save(commandeModel);
+        CommandeModel finalCommandeModel = commandeModel;
+        produits.forEach(produit -> {
+            produit.setId(null);
+            produit.setCommandeModel(finalCommandeModel);
+        });
+        produits = produitRepo.saveAll(produits);
+        commandeModel.setProduits(produits);
+
+        return commandeModel.toDto();
     }
 
-    @Override
     public List<CommandeDto> all() throws TechnicalException {
         List<CommandeModel> commandes = commandeRepo.findAll();
-        List<CommandeDto> commandeDtos = commandes.stream().map(commande -> commande.toDto()).collect(Collectors.toList());
-        for(CommandeDto commandeDto: commandeDtos){
-            commandeDto.setProduits(commandeDto.getProduits().stream().map(item -> produitRestClient.get(item.getId())).collect(Collectors.toList()));
-
-        }
-
+        List<CommandeDto> commandeDtos = commandes.stream().map(c -> c.toDto()).collect(Collectors.toList());
         return commandeDtos;
     }
 
-    @Override
-    public CommandeDto getById(Long id) throws TechnicalException {
+   public CommandeDto getById(Long id) throws TechnicalException {
         Optional<CommandeModel> commande = commandeRepo.findById(id);
-        if(!commande.isPresent()) throw new TechnicalException("COMMANDE_NOT_FOUND");
-        CommandeDto commandeDto = commande.get().toDto();
-        commandeDto.setProduits(commandeDto.getProduits().stream().map(item -> produitRestClient.get(item.getId())).collect(Collectors.toList()));
-        return commandeDto;
+        if(!commande.isPresent()) throw new TechnicalException(ExceptionCode.ITEM_NOT_EXIST);
+        return commande.get().toDto();
     }
 
-    @Override
-    public CommandeDto update(CommandeDto commandeDto) throws TechnicalException {
-        return commandeRepo.save(commandeDto.toEntity()).toDto();
+    public CommandeDto update(CommandeDto commande) throws TechnicalException {
+        return commandeRepo.save(commande.toEntity()).toDto();
     }
 
-    @Override
     public void delete(Long id) throws TechnicalException {
         commandeRepo.deleteById(id);
     }

@@ -12,7 +12,6 @@
     <artifactId>commande-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>commande-service</name>
-    <packaging>war</packaging>
     <description>commande-service</description>
     <properties>
         <java.version>1.8</java.version>

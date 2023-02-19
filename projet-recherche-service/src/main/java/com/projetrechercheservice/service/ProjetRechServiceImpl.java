@@ -71,7 +71,7 @@ public class ProjetRechServiceImpl implements ProjetRechService{
         List<ProjetRechercheDto> projetRechercheDtos1 = new ArrayList<>();
         for(ProjetRechercheDto projetRechercheDto: projetRechercheDtos){
             projetRechercheDto.setMembres(membresProjet(projetRechercheDto.getId()));
-            projetRechercheDto.setResponsable(responsableProjet(projetRechercheDto.getId()));
+            projetRechercheDto.setResponsable(professeurRestClient.searchProfesseurById(projetRechercheDto.getId()));
             projetRechercheDtos1.add(projetRechercheDto);
         }
         return projetRechercheDtos1;

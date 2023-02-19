@@ -1,0 +1,1 @@
+cd target && java -jar eureka-service-0.0.1-SNAPSHOT.jar

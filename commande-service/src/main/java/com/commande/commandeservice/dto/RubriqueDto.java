@@ -10,4 +10,10 @@ import lombok.ToString;
 public class RubriqueDto {
     private Long id;
     private String nom;
+    private String description;
+    private double budget;
+
+    public RubriqueDto(Long id) {
+        this.id = id;
+    }
 }
