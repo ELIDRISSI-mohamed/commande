@@ -1,0 +1,91 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------< org.projet:eureka-service >----------------------
+[INFO] Building eureka-service 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ war ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot-maven-plugin:2.7.0:run (default-cli) > test-compile @ eureka-service >>>
+[INFO] 
+[INFO] --- maven-resources-plugin:3.2.0:resources (default-resources) @ eureka-service ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Using 'UTF-8' encoding to copy filtered properties files.
+[INFO] Copying 1 resource
+[INFO] Copying 0 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:compile (default-compile) @ eureka-service ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:3.2.0:testResources (default-testResources) @ eureka-service ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Using 'UTF-8' encoding to copy filtered properties files.
+[INFO] skip non existing resourceDirectory E:\gestion de commande\microservices-gestion-commande\eureka-service\src\test\resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.10.1:testCompile (default-testCompile) @ eureka-service ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] <<< spring-boot-maven-plugin:2.7.0:run (default-cli) < test-compile @ eureka-service <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot-maven-plugin:2.7.0:run (default-cli) @ eureka-service ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.7.0)
+
+2023-02-20 11:03:13.330  INFO 3692 --- [           main] o.projet.demo.EurekaServiceApplication   : Starting EurekaServiceApplication using Java 1.8.0_111 on DESKTOP-KABIDFP with PID 3692 (E:\gestion de commande\microservices-gestion-commande\eureka-service\target\classes started by MOHAMED in E:\gestion de commande\microservices-gestion-commande\eureka-service)
+2023-02-20 11:03:13.340  INFO 3692 --- [           main] o.projet.demo.EurekaServiceApplication   : No active profile set, falling back to 1 default profile: "default"
+2023-02-20 11:03:15.116  INFO 3692 --- [           main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=931ab1bb-cef3-3982-bbea-f6bc0efacc25
+2023-02-20 11:03:16.419  INFO 3692 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8761 (http)
+2023-02-20 11:03:16.434  INFO 3692 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-02-20 11:03:16.434  INFO 3692 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.63]
+2023-02-20 11:03:16.704  INFO 3692 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-02-20 11:03:16.704  INFO 3692 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3290 ms
+2023-02-20 11:03:17.399  INFO 3692 --- [           main] c.s.j.s.i.a.WebApplicationImpl           : Initiating Jersey application, version 'Jersey: 1.19.4 05/24/2017 03:20 PM'
+2023-02-20 11:03:17.483  INFO 3692 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
+2023-02-20 11:03:17.483  INFO 3692 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
+2023-02-20 11:03:17.673  INFO 3692 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
+2023-02-20 11:03:17.673  INFO 3692 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
+2023-02-20 11:03:22.057  INFO 3692 --- [           main] DiscoveryClientOptionalArgsConfiguration : Eureka HTTP Client uses Jersey
+2023-02-20 11:03:22.147  WARN 3692 --- [           main] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2023-02-20 11:03:22.167  INFO 3692 --- [           main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2023-02-20 11:03:22.216  INFO 3692 --- [           main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2023-02-20 11:03:22.216  INFO 3692 --- [           main] com.netflix.discovery.DiscoveryClient    : Client configured to neither register nor query for data.
+2023-02-20 11:03:22.232  INFO 3692 --- [           main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1676891002216 with initial instances count: 0
+2023-02-20 11:03:22.278  INFO 3692 --- [           main] c.n.eureka.DefaultEurekaServerContext    : Initializing ...
+2023-02-20 11:03:22.278  INFO 3692 --- [           main] c.n.eureka.cluster.PeerEurekaNodes       : Adding new peer nodes [http://localhost:8761/eureka/]
+2023-02-20 11:03:22.448  INFO 3692 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
+2023-02-20 11:03:22.448  INFO 3692 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
+2023-02-20 11:03:22.448  INFO 3692 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
+2023-02-20 11:03:22.448  INFO 3692 --- [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
+2023-02-20 11:03:22.564  INFO 3692 --- [           main] c.n.eureka.cluster.PeerEurekaNodes       : Replica node URL:  http://localhost:8761/eureka/
+2023-02-20 11:03:22.579  INFO 3692 --- [           main] c.n.e.registry.AbstractInstanceRegistry  : Finished initializing remote region registries. All known remote regions: []
+2023-02-20 11:03:22.579  INFO 3692 --- [           main] c.n.eureka.DefaultEurekaServerContext    : Initialized
+2023-02-20 11:03:22.595  INFO 3692 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2023-02-20 11:03:22.633  INFO 3692 --- [           main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application UNKNOWN with eureka with status UP
+2023-02-20 11:03:22.664  INFO 3692 --- [      Thread-10] o.s.c.n.e.server.EurekaServerBootstrap   : isAws returned false
+2023-02-20 11:03:22.664  INFO 3692 --- [      Thread-10] o.s.c.n.e.server.EurekaServerBootstrap   : Initialized server context
+2023-02-20 11:03:22.664  INFO 3692 --- [      Thread-10] c.n.e.r.PeerAwareInstanceRegistryImpl    : Got 1 instances from neighboring DS node
+2023-02-20 11:03:22.664  INFO 3692 --- [      Thread-10] c.n.e.r.PeerAwareInstanceRegistryImpl    : Renew threshold is: 1
+2023-02-20 11:03:22.664  INFO 3692 --- [      Thread-10] c.n.e.r.PeerAwareInstanceRegistryImpl    : Changing status to UP
+2023-02-20 11:03:22.680  INFO 3692 --- [      Thread-10] e.s.EurekaServerInitializerConfiguration : Started Eureka Server
+2023-02-20 11:03:22.695  INFO 3692 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8761 (http) with context path ''
+2023-02-20 11:03:22.695  INFO 3692 --- [           main] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 8761
+2023-02-20 11:03:24.311  INFO 3692 --- [           main] o.projet.demo.EurekaServiceApplication   : Started EurekaServiceApplication in 13.226 seconds (JVM running for 14.217)
+2023-02-20 11:03:34.527  INFO 3692 --- [nio-8761-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-02-20 11:03:34.527  INFO 3692 --- [nio-8761-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-02-20 11:03:34.531  INFO 3692 --- [nio-8761-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2023-02-20 11:04:17.424  INFO 3692 --- [nio-8761-exec-1] c.n.e.registry.AbstractInstanceRegistry  : Registered instance GATEWAY-SERVICE/192.168.137.48:GATEWAY-SERVICE:9090 with status UP (replication=false)
+2023-02-20 11:04:18.060  INFO 3692 --- [nio-8761-exec-6] c.n.e.registry.AbstractInstanceRegistry  : Registered instance GATEWAY-SERVICE/192.168.137.48:GATEWAY-SERVICE:9090 with status UP (replication=true)
+2023-02-20 11:04:22.678  INFO 3692 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2023-02-20 11:04:53.886  INFO 3692 --- [nio-8761-exec-9] c.n.e.registry.AbstractInstanceRegistry  : Registered instance BUDGET-SERVICE/192.168.137.48:BUDGET-SERVICE:8087 with status UP (replication=false)
+2023-02-20 11:04:54.419  INFO 3692 --- [io-8761-exec-10] c.n.e.registry.AbstractInstanceRegistry  : Registered instance BUDGET-SERVICE/192.168.137.48:BUDGET-SERVICE:8087 with status UP (replication=true)
+2023-02-20 11:05:22.691  INFO 3692 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 12ms
+2023-02-20 11:06:22.709  INFO 3692 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 17ms
+2023-02-20 11:07:22.712  INFO 3692 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 2ms
+2023-02-20 11:08:22.728  INFO 3692 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 15ms
+2023-02-20 11:09:22.731  INFO 3692 --- [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 3ms

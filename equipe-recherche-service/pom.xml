@@ -12,7 +12,7 @@
     <artifactId>equipe-recherche-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>equipe-recherche-service</name>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <description>equipe-recherche-service</description>
     <properties>
         <java.version>1.8</java.version>
@@ -55,10 +55,6 @@
             <groupId>org.keycloak</groupId>
             <artifactId>keycloak-spring-boot-starter</artifactId>
             <version>8.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
